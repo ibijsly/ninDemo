@@ -7,5 +7,6 @@ public interface UserDetailsDao extends JpaRepository<UserDetails, Long> {
 
     public UserDetails findByPhoneAndEmail(String phone, String email);
     public UserDetails findByNin(String nin);
+    public UserDetails findByVin(String vin);
 
 }

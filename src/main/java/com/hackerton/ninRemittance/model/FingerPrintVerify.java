@@ -1,16 +1,25 @@
 package com.hackerton.ninRemittance.model;
 
 public class FingerPrintVerify {
-    private String nin;
+    private int type;
+    private String id;
     private int position;
     private String image;
 
-    public String getNin() {
-        return nin;
+    public int getType() {
+        return type;
     }
 
-    public void setNin(String nin) {
-        this.nin = nin;
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String nin) {
+        this.id = nin;
     }
 
     public int getPosition() {

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Base64;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -37,5 +38,13 @@ public class UserService {
 
     public UserDetails findByNin(String nin){
         return userDetailsDao.findByNin(nin);
+    }
+
+    public UserDetails findByVin(String vin){
+        return userDetailsDao.findByVin(vin);
+    }
+
+    public List<UserDetails> allUsers(){
+        return userDetailsDao.findAll();
     }
 }

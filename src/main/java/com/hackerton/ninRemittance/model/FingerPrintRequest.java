@@ -12,7 +12,8 @@ public class FingerPrintRequest {
     private String photo8;
     private String photo9;
 
-    private String nin;
+    private int type;
+    private String id;
 
     public String getPhoto0() {
         return photo0;
@@ -94,11 +95,19 @@ public class FingerPrintRequest {
         this.photo9 = photo9;
     }
 
-    public String getNin() {
-        return nin;
+    public int getType() {
+        return type;
     }
 
-    public void setNin(String nin) {
-        this.nin = nin;
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

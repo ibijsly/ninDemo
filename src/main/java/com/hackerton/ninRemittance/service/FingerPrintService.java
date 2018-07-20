@@ -23,7 +23,21 @@ public class FingerPrintService {
     public ResponseEntity<ResponseModel> addFingerPrint(FingerPrintRequest fingerPrintRequest){
         try {
 
-            UserDetails userDetails = userService.findByNin(fingerPrintRequest.getNin());
+            UserDetails userDetails = null;
+
+            switch (fingerPrintRequest.getType()){
+                case 0: /*This is an NIN request*/
+                    userDetails = userService.findByNin(fingerPrintRequest.getId());
+                    break;
+                case 1: /*This is a VIN request*/
+                    userDetails = userService.findByVin(fingerPrintRequest.getId());
+                    break;
+                default:
+                    return new ResponseEntity<ResponseModel>(new ResponseModel("02", "Unknown Type", fingerPrintRequest), HttpStatus.NOT_FOUND);
+            }
+
+            if (userDetails == null)
+                return new ResponseEntity<ResponseModel>(new ResponseModel("02", "Not Found", fingerPrintRequest), HttpStatus.NOT_FOUND);
 
             Fingerprint fingerprint = new Fingerprint();
             fingerprint.setUserDetails(userDetails);
@@ -43,14 +57,29 @@ public class FingerPrintService {
             return new ResponseEntity<>(new ResponseModel("00", "Success", "Success"), HttpStatus.OK);
         }catch (Exception ex){
             ex.printStackTrace();
+            return new ResponseEntity<>(new ResponseModel("99", "Failed", "Failed"), HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(new ResponseModel("99", "Failed", "Failed"), HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity<ResponseModel> verifyThumbPrint(FingerPrintVerify fingerPrintVerify){
         try {
-            UserDetails userDetails = userService.findByNin(fingerPrintVerify.getNin());
+            UserDetails userDetails = null;
+
+            switch (fingerPrintVerify.getType()){
+                case 0: /*This is an NIN request*/
+                    userDetails = userService.findByNin(fingerPrintVerify.getId());
+                    break;
+                case 1: /*This is a VIN request*/
+                    userDetails = userService.findByVin(fingerPrintVerify.getId());
+                    break;
+                default:
+                    return new ResponseEntity<ResponseModel>(new ResponseModel("02", "Unknown Type", fingerPrintVerify), HttpStatus.NOT_FOUND);
+            }
+
+            if (userDetails == null)
+                return new ResponseEntity<ResponseModel>(new ResponseModel("02", "Not Found", fingerPrintVerify), HttpStatus.NOT_FOUND);
+
             Fingerprint fingerprint = fingerprintDao.findByUserDetails(userDetails);
 
             byte[] probeImage = Base64.getDecoder().decode(fingerPrintVerify.getImage().getBytes("UTF-8"));
@@ -100,7 +129,7 @@ public class FingerPrintService {
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            return new ResponseEntity<>(new ResponseModel("00", "Failed", null), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new ResponseModel("99", "Failed", null), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
