@@ -26,6 +26,8 @@ public class UserDetails {
 
     private String nin;
 
+    private String vin;
+
     public long getId() {
         return id;
     }
@@ -98,38 +100,11 @@ public class UserDetails {
         this.pix = pix;
     }
 
-    //    private String birthCountry;
-//    private String birthDate;
-//    private String birthLga;
-//    private String birthState;
-//    private String centralId;
-//    private String educationalLevel;
-//    private String email;
-//    private String employmentStatus;
-//
-//    private String firstName;
-//    private String gender;
-//    private String height;
-//    private String maidenName
-//    private String maritalStatus;
-//    private String middleName;
-//
-//    private String nin;
-//    private String nok_address1;
-//    private String nok_address2;
-//    private String nok_firstname;
-//    private String nok_lga;
-//    private String nok_middlename;
-//    private String nok_postalcode;
-//    private String nok_state;
-//    private String nok_surname;
-//    private String nok_town;
-//
-//    private String nspokenlang;
-//    private String ospokenlang;
-//    private String othername;
-//    private String pfirstname;
-//    private String photo;
-//
+    public String getVin() {
+        return vin;
+    }
 
+    public void setVin(String vin) {
+        this.vin = vin;
+    }
 }
