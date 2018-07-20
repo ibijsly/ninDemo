@@ -3,6 +3,7 @@ package com.hackerton.ninRemittance.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "edge_iduserdetails")
 public class UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
