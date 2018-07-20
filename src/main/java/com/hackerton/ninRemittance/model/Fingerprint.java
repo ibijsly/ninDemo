@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "edge_fingerprint")
 public class Fingerprint {
 
     @Id
